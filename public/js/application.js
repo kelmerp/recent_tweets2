@@ -1,7 +1,12 @@
+function onSuccess(success){
+  $(".container").replaceWith(success);
+}
 $(document).ready(function() {
-  // This is called after the document has loaded in its entirety
-  // This guarantees that any elements we bind to will exist on the page
-  // when we try to bind to them
-
-  // See: http://docs.jquery.com/Tutorials:Introducing_$(document).ready()
+  $("form").on("submit", function(event){
+      event.preventDefault();
+      var handle = $('#handle').serialize();
+      console.log(handle);
+      $.post("/gettweets", handle, onSuccess);
+      $(".container").append('<img src="/spinner.gif">');
+    });
 });
